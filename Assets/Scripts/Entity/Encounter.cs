@@ -4,5 +4,6 @@ namespace Entity
 {
     public class Encounter : MonoBehaviour
     {
+        
     }
 }
