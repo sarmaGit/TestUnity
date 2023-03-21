@@ -1,5 +1,4 @@
-using System;
-using Entity;
+using Entity.Encounter;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -27,7 +26,7 @@ namespace Move
                 return false;
             }
 
-            if (!hit.collider.gameObject.GetComponent<Encounter>())
+            if (!hit.collider.gameObject.GetComponent<AbstractEncounter>())
             {
                 Debug.Log("HIT WRONG - {0}", hit.collider.gameObject);
                 return false;
