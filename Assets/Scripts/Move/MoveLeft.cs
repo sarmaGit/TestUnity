@@ -10,9 +10,7 @@ namespace Move
 
         public override void Move()
         {
-            Debug.Log(playerTransform.position);
             playerTransform.position += direction;
-            Debug.Log(playerTransform.position);
         }
 
         private void Update()

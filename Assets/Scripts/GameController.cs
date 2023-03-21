@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Service;
 using UnityEngine;
 
 public class GameController : MonoBehaviour
