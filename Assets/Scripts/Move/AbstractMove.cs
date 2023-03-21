@@ -28,14 +28,7 @@ namespace Move
 
             if (!hit.collider.gameObject.GetComponent<AbstractEncounter>())
             {
-                Debug.Log("HIT WRONG - {0}", hit.collider.gameObject);
                 return false;
-            }
-
-            if (Input.GetKeyDown(KeyCode.S))
-            {
-                Debug.Log(hit.point);
-                Destroy(hit.collider.gameObject);
             }
 
             return true;
