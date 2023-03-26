@@ -1,7 +1,9 @@
-﻿namespace State
+﻿using System;
+
+namespace State
 {
-    public class EncounterState:AbstractState
+    public class EncounterState : AbstractState
     {
-        public const string NAME="encounter";
+        public const string NAME = "encounter";
     }
 }

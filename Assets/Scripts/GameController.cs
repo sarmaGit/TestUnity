@@ -8,8 +8,9 @@ public class GameController : MonoBehaviour
     public GameObject player;
     public EncounterGenerator encounterGenerator;
 
-    void Start()
+    public void NewGame()
     {
+        encounterGenerator.Reset();
         List<GameObject> encounters = encounterGenerator.Generate();
         GameObject encounter = encounters[Random.Range(0, encounterGenerator.GetCols() * 2 - 1)];
         player.transform.position = encounter.transform.position;

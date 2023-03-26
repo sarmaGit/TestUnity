@@ -1,9 +1,9 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace State
 {
-    public class AbstractState:MonoBehaviour
+    public class AbstractState : MonoBehaviour
     {
-        
     }
 }
