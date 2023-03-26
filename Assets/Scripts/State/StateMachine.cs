@@ -1,17 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace State
 {
     public class StateMachine : MonoBehaviour
     {
-        private string _currentState;
-        private string _previousState;
+        public string _currentState;
+        public string _previousState;
 
         private Dictionary<string, GameObject> _states = new Dictionary<string, GameObject>();
 
-        public GameObject test;
+        public UnityEvent onInitState;
+        public UnityEvent onMenuState;
+        public UnityEvent onEncounterState;
+        public UnityEvent onTravelState;
+        public UnityEvent onLoadState;
 
         public void Start()
         {
@@ -39,18 +44,15 @@ namespace State
             _previousState = _currentState;
             _currentState = name;
 
-            GameObject stateGameObject = _states[_currentState];
-            stateGameObject.SetActive(true);
+            GameObject previousStateGameObject = _states[_previousState];
+            previousStateGameObject.SetActive(false);
+            
+            GameObject currentStateGameObject = _states[_currentState];
+            currentStateGameObject.SetActive(true);
 
-            foreach (var state in _states)
-            {
-                if (_currentState == state.Key)
-                {
-                    continue;
-                }
+            Debug.Log("Set state, current " + _currentState + ", previous " + _previousState);
 
-                state.Value.SetActive(false);
-            }
+            // DispatchStateEvent(name);
         }
 
         private void Reset()
@@ -58,6 +60,39 @@ namespace State
             foreach (var state in _states)
             {
                 state.Value.SetActive(false);
+            }
+        }
+
+        public string GetPreviousState()
+        {
+            return _previousState;
+        }
+
+        public string GetCurrentState()
+        {
+            return _currentState;
+        }
+
+        private void DispatchStateEvent(string name)
+        {
+            switch (name)
+            {
+                case InitState.NAME:
+                    onInitState.Invoke();
+                    break;
+                case MenuState.NAME:
+                    onMenuState.Invoke();
+                    break;
+                case LoadState.NAME:
+                    onLoadState.Invoke();
+                    break;
+                case TravelState.NAME:
+                    onTravelState.Invoke();
+                    break;
+                case EncounterState.NAME:
+                    onEncounterState.Invoke();
+                    break;
+                default: throw new Exception("Unknown state " + name);
             }
         }
     }
