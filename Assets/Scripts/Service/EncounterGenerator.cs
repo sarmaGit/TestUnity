@@ -1,11 +1,15 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Service
 {
     public class EncounterGenerator : MonoBehaviour
     {
-        public GameObject encounterPrefab;
+        public GameObject battleEncounterPrefab;
+        public GameObject healEncounterPrefab;
+        public List<GameObject> _encountersVariants = new List<GameObject>();
 
         public int cols = 5;
         public int rows = 5;
@@ -14,11 +18,18 @@ namespace Service
 
         public List<GameObject> Generate()
         {
+            if (_encountersVariants.Count == 0)
+            {
+                _encountersVariants.Add(battleEncounterPrefab);
+                _encountersVariants.Add(healEncounterPrefab);
+            }
+
             for (int y = 0; y < rows; y++)
             {
                 for (int x = 0; x < cols; x++)
                 {
-                    GameObject encounter = Instantiate(encounterPrefab, transform, true);
+                    GameObject randomEncounter = chooseEncounter();
+                    GameObject encounter = Instantiate(randomEncounter, transform, true);
                     encounter.transform.position = new Vector3(x, y, 0);
                     _encounters.Add(encounter);
                     encounter.name += " " + _encounters.Count;
@@ -26,6 +37,16 @@ namespace Service
             }
 
             return _encounters;
+        }
+
+        public GameObject chooseEncounter()
+        {
+            int length = _encountersVariants.Count;
+            int seed = Random.Range(0, length);
+
+            Debug.Log("length -" + length + ", seed - " + seed);
+
+            return _encountersVariants[seed];
         }
 
         public int GetCols()
@@ -41,6 +62,12 @@ namespace Service
             }
 
             _encounters.Clear();
+        }
+
+        public void RemoveEncounter(GameObject encounter)
+        {
+            _encounters.Remove(encounter);
+            Destroy(encounter);
         }
     }
 }
