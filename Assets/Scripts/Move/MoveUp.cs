@@ -5,18 +5,23 @@ namespace Move
 {
     public class MoveUp : AbstractMove
     {
-        public Transform playerTransform;
+        private Transform _playerTransform;
 
         private Vector3 direction = Vector3.up;
 
         public override void Move()
         {
-            playerTransform.position += direction;
+            _playerTransform.position += direction;
         }
-        
+
+        public override void SetPlayerTransform(Transform transform)
+        {
+            _playerTransform = transform;
+        }
+
         private void Update()
         {
-            button.interactable = CheckCollision(playerTransform.position, direction);
+            button.interactable = CheckCollision(_playerTransform.position, direction);
         }
     }
 }
