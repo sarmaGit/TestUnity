@@ -50,8 +50,6 @@ namespace State
             GameObject currentStateGameObject = _states[_currentState];
             currentStateGameObject.SetActive(true);
 
-            Debug.Log("Set state, current " + _currentState + ", previous " + _previousState);
-
             // DispatchStateEvent(name);
         }
 

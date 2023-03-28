@@ -44,8 +44,6 @@ namespace Service
             int length = _encountersVariants.Count;
             int seed = Random.Range(0, length);
 
-            Debug.Log("length -" + length + ", seed - " + seed);
-
             return _encountersVariants[seed];
         }
 
@@ -68,6 +66,11 @@ namespace Service
         {
             _encounters.Remove(encounter);
             Destroy(encounter);
+        }
+
+        public void AddEncounter(GameObject encounter)
+        {
+            _encounters.Add(encounter);
         }
     }
 }

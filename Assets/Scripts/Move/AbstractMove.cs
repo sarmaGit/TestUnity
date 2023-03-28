@@ -7,6 +7,7 @@ namespace Move
     public abstract class AbstractMove : MonoBehaviour
     {
         public abstract void Move();
+        public abstract void SetPlayerTransform(Transform transform);
 
         protected Button button;
 
